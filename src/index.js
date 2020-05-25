@@ -1,8 +1,3 @@
-import './scss/style.scss';
+import './scss/index.scss'
 
-async function start() {
-   await Promise.resolve();
-   console.log('Promise okey!')
-}
-
-start();
+console.log('Working!')
