@@ -10,7 +10,7 @@ export class Excel {
    getRoot(){
       const $root = $.create('div', 'excel');
 
-      this.components.map( Component => {
+      this.components = this.components.map( Component => {
 
          const $el = $.create('div', Component.className);         
          const component = new Component($el);
@@ -18,6 +18,8 @@ export class Excel {
          // debugger
          $el.html(component.toHTML());
          $root.append($el);
+
+         return component;
       });
       
       console.log($root);
@@ -28,5 +30,8 @@ export class Excel {
 
    render(){
       this.$el.append(this.getRoot());
+
+      this.components.forEach(component => component.init());
+      
    }
 }
