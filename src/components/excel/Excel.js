@@ -22,7 +22,7 @@ export class Excel {
          return component;
       });
       
-      console.log($root);
+      // console.log($root);
       
       return $root;
    }
