@@ -14,6 +14,9 @@
     flex-direction: row;
     min-height: 20px;
     height: $row-height;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
   }
 
   .row-info {
@@ -44,6 +47,9 @@
     border-left: 0;
     height: 100%;
     position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
   }
 
   .cell {
