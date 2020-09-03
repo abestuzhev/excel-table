@@ -13,6 +13,11 @@ class Dom {
         return this.$el.outerHTML.trim();
     }
 
+    focus(){
+        this.$el.focus();
+        return this;
+    }
+
     clear() {
         this.$el.html("");
         return this;
