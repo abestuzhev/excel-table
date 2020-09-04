@@ -61,6 +61,20 @@ class Dom {
         })
     }
 
+    id(boolean){
+        //если true, то возвращает строку, иначе объект
+        // return boolean ? {
+        //     col: this.$el.dataset.col,
+        //     row: this.$el.dataset.row,
+        // }
+        // : this.$el.dataset.id;
+
+
+        const id = this.$el.dataset.id;
+        const idArray = id.split(':');
+        cosnt 
+    }
+
     append(node){
         if(node instanceof Dom) {
             node = node.$el

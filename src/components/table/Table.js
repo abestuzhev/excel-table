@@ -40,13 +40,31 @@ export class Table extends ExcelComponent {
       const keys = ['Enter', 'Tab', 'ArrowUp', 'ArrowLeft', 'ArrowRight', 'ArrowDown'];
       if(keys.includes(event.key)){
          event.preventDefault();
+         console.log("current", this.selection.current.id(true));
          const id = this.selection.current.id(true);
-         const $next = this.$root.find(nextSelector(key, id));
+         const $next = this.$root.find(nextSelector(event.key, id));
          this.selection.select($next);
       }
    }
 }
 
 function nextSelector(key, {col, row}) {
+   switch(key){
+      case 'Enter':
+      case 'ArrowDown':
+         row--
+         break;
+      case 'Tab':
+      case 'ArrowRight':
+         col++;
+         break;
+      case 'ArrowLeft':
+         col--;
+         break;
+      case 'ArrowUp':
+         row++;
+         break;
+   }
 
+   return `[data-id=${col}:${row}]`;
 }
