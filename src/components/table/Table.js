@@ -38,7 +38,7 @@ export class Table extends ExcelComponent {
    }
    onKeydown(event){
       const keys = ['Enter', 'Tab', 'ArrowUp', 'ArrowLeft', 'ArrowRight', 'ArrowDown'];
-      if(keys.includes(event.key)){
+      if(keys.includes(event.key) && !event.shiftKey){
          event.preventDefault();
          console.log("current", this.selection.current.id(true));
          const id = this.selection.current.id(true);
@@ -48,23 +48,24 @@ export class Table extends ExcelComponent {
    }
 }
 
-function nextSelector(key, {col, row}) {
+
+function nextSelector(key, {row, col}) {
+   const MIN_VALUE = 0;
    switch(key){
       case 'Enter':
       case 'ArrowDown':
-         row--
+         row++;
          break;
       case 'Tab':
       case 'ArrowRight':
          col++;
          break;
       case 'ArrowLeft':
-         col--;
+         col = col - 1 < MIN_VALUE ? MIN_VALUE : col - 1;
          break;
       case 'ArrowUp':
-         row++;
+         row = row - 1 < MIN_VALUE ? MIN_VALUE : row - 1;
          break;
    }
-
-   return `[data-id=${col}:${row}]`;
+   return `[data-id="${row}:${col}"]`
 }
