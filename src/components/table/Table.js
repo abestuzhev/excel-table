@@ -38,15 +38,32 @@ export class Table extends ExcelComponent {
    }
    onKeydown(event){
       const keys = ['Enter', 'Tab', 'ArrowUp', 'ArrowLeft', 'ArrowRight', 'ArrowDown'];
-      if(keys.includes(event.key)){
+      if(keys.includes(event.key) && !event.shiftKey){
          event.preventDefault();
          const id = this.selection.current.id(true);
-         const $next = this.$root.find(nextSelector(key, id));
+         const $next = this.$root.find(nextSelector(event.key, id));
          this.selection.select($next);
       }
    }
 }
 
-function nextSelector(key, {col, row}) {
-
+function nextSelector(key, {row, col}) {
+   const MIN_VALUE = 0;
+   switch(key){
+      case 'Enter':
+      case 'ArrowDown':
+         row++;
+         break;
+      case 'Tab':
+      case 'ArrowRight':
+         col++;
+         break;
+      case 'ArrowLeft':
+         col = col - 1 < MIN_VALUE ? MIN_VALUE : col - 1;
+         break;
+      case 'ArrowUp':
+         row = row - 1 < MIN_VALUE ? MIN_VALUE : row - 1;
+         break;
+   }
+   return `[data-id="${row}:${col}"]`
 }

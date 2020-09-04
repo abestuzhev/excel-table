@@ -13,6 +13,17 @@ class Dom {
         return this.$el.outerHTML.trim();
     }
 
+    id(parse){
+        if (parse){
+           const idArr = this.id().split(':');
+           return {
+             row: idArr[0],
+             col: idArr[1]
+           }
+        }
+        return this.$el.dataset.id
+    }
+
     focus(){
         this.$el.focus();
         return this;
