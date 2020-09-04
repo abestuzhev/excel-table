@@ -5,7 +5,9 @@ export class Emitter {
 
    //уведомляем слушателя
    emit(event, ...args){
-
+      this.listeners[event].forEach(listener => {
+         listener(...args);
+      });
    }
 
    //пидписка на уведомления

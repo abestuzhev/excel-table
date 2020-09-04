@@ -13,13 +13,17 @@ class Dom {
         return this.$el.outerHTML.trim();
     }
 
+    text(text){
+        return this.$el.textContent = text;
+    }
+
     id(parse){
         if (parse){
-           const idArr = this.id().split(':');
-           return {
-             row: idArr[0],
-             col: idArr[1]
-           }
+            const idArr = this.id().split(':');
+            return {
+                row: idArr[0],
+                col: idArr[1]
+            }
         }
         return this.$el.dataset.id
     }
@@ -70,20 +74,6 @@ class Dom {
         Object.keys(styles).forEach( key => {
             this.$el.style[key] = styles[key];
         })
-    }
-
-    id(boolean){
-        //если true, то возвращает строку, иначе объект
-        // return boolean ? {
-        //     col: this.$el.dataset.col,
-        //     row: this.$el.dataset.row,
-        // }
-        // : this.$el.dataset.id;
-
-
-        const id = this.$el.dataset.id;
-        const idArray = id.split(':');
-        cosnt 
     }
 
     append(node){
