@@ -20,6 +20,8 @@ export class Excel {
          // debugger
          $el.html(component.toHTML());
          $root.append($el);
+
+         console.log('component', component);
          return component;
       });      
       return $root;

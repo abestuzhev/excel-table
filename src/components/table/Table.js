@@ -31,7 +31,7 @@ export class Table extends ExcelComponent {
       this.selection.select($cell);
 
       console.log("this.emitter", this.emitter);
-      this.$subscribe('formula:done', text => this.selection.current.text(text));
+      this.$subscribe('formula:input', text => this.selection.current.text(text));
    }
 
    onMousedown(event) {
@@ -50,9 +50,9 @@ export class Table extends ExcelComponent {
          const $next = this.$root.find(nextSelector(event.key, id));
          this.selection.select($next);
       }
+      this.$emit('table:done', this.selection.current.textContent());
    }
 }
-
 
 function nextSelector(key, {row, col}) {
    const MIN_VALUE = 0;

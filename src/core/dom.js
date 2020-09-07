@@ -17,6 +17,10 @@ class Dom {
         return this.$el.textContent = text;
     }
 
+    textContent(text){
+        return this.$el.textContent;
+    }
+
     id(parse){
         if (parse){
             const idArr = this.id().split(':');

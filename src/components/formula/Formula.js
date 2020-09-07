@@ -11,6 +11,11 @@ export class Formula extends ExcelComponent{
       });
    }
 
+   init(){
+      super.init();
+      this.$subscribe('table:done', text => this.$root.find('.input').text(text));
+   }
+
    toHTML() {
       return `
       <div class="info">fx</div>
@@ -20,6 +25,11 @@ export class Formula extends ExcelComponent{
 
    onInput(event){
       const text = event.target.textContent.trim();
-      this.$emit('formula:done', text);
+      this.$emit('formula:input', text);
+      console.log('formula:input');
+   }
+
+   onKeydown(event){
+
    }
 }
