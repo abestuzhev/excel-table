@@ -31,7 +31,7 @@ export class Table extends ExcelComponent {
       this.selection.select($cell);
 
       console.log("this.emitter", this.emitter);
-      this.emitter.subscribe('formula:done', text => this.selection.current.text(text));
+      this.$subscribe('formula:done', text => this.selection.current.text(text));
    }
 
    onMousedown(event) {

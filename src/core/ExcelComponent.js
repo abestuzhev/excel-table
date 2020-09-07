@@ -14,8 +14,12 @@ export class ExcelComponent extends DomListener{
 
    }
 
-   $emit(event, fn){
-      this.emitter.emit(event, fn);
+   $emit(event, args){
+      this.emitter.emit(event, args);
+   }
+
+   $subscribe(event, fn){
+      this.emitter.subscribe(event, fn);
    }
 
    toHTML(){

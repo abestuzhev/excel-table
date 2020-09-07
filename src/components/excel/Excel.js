@@ -17,17 +17,11 @@ export class Excel {
 
          const $el = $.create('div', Component.className);         
          const component = new Component($el, componentEmitter);
-         // console.log($el.$el);
          // debugger
          $el.html(component.toHTML());
          $root.append($el);
-
-         console.log(component);
          return component;
-      });
-      
-      // console.log($root);
-      
+      });      
       return $root;
    }
 
