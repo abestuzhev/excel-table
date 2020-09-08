@@ -28,10 +28,16 @@ export class Table extends ExcelComponent {
    init() {
       super.init();
       const $cell = this.$root.find('[data-id="0:0"]');
-      this.selection.select($cell);
 
-      console.log("this.emitter", this.emitter);
+      this.selectCell($cell);
+
       this.$subscribe('formula:input', text => this.selection.current.text(text));
+      this.$subscribe('formula:done', () => this.selection.current.focus());
+   }
+
+   selectCell($cell){
+      this.$emit('table:select', $cell);
+      this.selection.select($cell);      
    }
 
    onMousedown(event) {
@@ -48,9 +54,11 @@ export class Table extends ExcelComponent {
          event.preventDefault();
          const id = this.selection.current.id(true);
          const $next = this.$root.find(nextSelector(event.key, id));
-         this.selection.select($next);
-      }
-      this.$emit('table:done', this.selection.current.textContent());
+         
+         this.selectCell($next);
+      }     
+      
+      this.$emit('table:done', this.selection.current.text());
    }
 }
 

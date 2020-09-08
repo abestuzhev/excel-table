@@ -14,12 +14,19 @@ class Dom {
     }
 
     text(text){
-        return this.$el.textContent = text;
+        if(typeof text === 'string'){
+            this.$el.textContent = text;
+            return this;
+        }
+        if(this.$el.tagName.toLowerCase() === 'input') {
+            return this.$el.value.trim();
+        }
+        return this.$el.textContent.trim();
     }
 
-    textContent(text){
-        return this.$el.textContent;
-    }
+    // textContent(){
+    //     return this.$el.textContent;
+    // }
 
     id(parse){
         if (parse){
