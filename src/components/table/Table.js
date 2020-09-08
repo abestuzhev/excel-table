@@ -11,7 +11,7 @@ export class Table extends ExcelComponent {
    constructor($root, options) {
       super($root, {
          name: "Table",
-         listeners: ['mousedown', 'keydown'],
+         listeners: ['mousedown', 'keydown', 'input'],
          ...options
       }
       );
@@ -28,16 +28,14 @@ export class Table extends ExcelComponent {
    init() {
       super.init();
       const $cell = this.$root.find('[data-id="0:0"]');
-
       this.selectCell($cell);
-
       this.$subscribe('formula:input', text => this.selection.current.text(text));
       this.$subscribe('formula:done', () => this.selection.current.focus());
    }
 
    selectCell($cell){
+      this.selection.select($cell);
       this.$emit('table:select', $cell);
-      this.selection.select($cell);      
    }
 
    onMousedown(event) {
@@ -45,9 +43,11 @@ export class Table extends ExcelComponent {
          resizeHandler(this.$root, event);
       }else if(isCell(event)){
          const $target = $(event.target);
-         this.selection.select($target)
+         this.selection.select($target);
+         this.selectCell($target);
       }
    }
+
    onKeydown(event){
       const keys = ['Enter', 'Tab', 'ArrowUp', 'ArrowLeft', 'ArrowRight', 'ArrowDown'];
       if(keys.includes(event.key) && !event.shiftKey){
@@ -56,9 +56,12 @@ export class Table extends ExcelComponent {
          const $next = this.$root.find(nextSelector(event.key, id));
          
          this.selectCell($next);
-      }     
-      
+      }
       this.$emit('table:done', this.selection.current.text());
+   }
+
+   onInput(event){
+      this.$emit('table:input', $(event.target));
    }
 }
 

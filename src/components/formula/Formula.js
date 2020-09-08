@@ -14,8 +14,10 @@ export class Formula extends ExcelComponent{
 
    init(){
       super.init();
-      this.$subscribe('table:done', text => this.$root.find('.input').text(text));
-      this.$subscribe('table:select', $cell => this.$root.find('.input').text($cell.data.value));
+      this.$formula = this.$root.find('.input');
+      this.$subscribe('table:done', text => this.$formula.text(text));
+      this.$subscribe('table:select', $cell => this.$formula.text($cell.text()));
+      this.$subscribe('table:input', $cell => this.$formula.text($cell.text()))
    }
 
    toHTML() {
