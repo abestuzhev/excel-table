@@ -13,6 +13,37 @@ class Dom {
         return this.$el.outerHTML.trim();
     }
 
+    text(text){
+        if(typeof text === 'string'){
+            this.$el.textContent = text;
+            return this;
+        }
+        if(this.$el.tagName.toLowerCase() === 'input') {
+            return this.$el.value.trim();
+        }
+        return this.$el.textContent.trim();
+    }
+
+    // textContent(){
+    //     return this.$el.textContent;
+    // }
+
+    id(parse){
+        if (parse){
+            const idArr = this.id().split(':');
+            return {
+                row: idArr[0],
+                col: idArr[1]
+            }
+        }
+        return this.$el.dataset.id
+    }
+
+    focus(){
+        this.$el.focus();
+        return this;
+    }
+
     clear() {
         this.$el.html("");
         return this;
@@ -36,6 +67,18 @@ class Dom {
 
     findAll(selector){
         return this.$el.querySelectorAll(selector);
+    }
+
+    find(selector){
+        return $(this.$el.querySelector(selector));
+    }
+
+    addClass(className){
+        this.$el.classList.add(className);
+    }
+
+    removeClass(className){
+        this.$el.classList.remove(className);
     }
 
     css(styles = {}){
