@@ -1,21 +1,20 @@
-export function createStore() {
-   const state = {};
+export function createStore(rootReducer, initialState) {
+   let state = rootReducer({...initialState}, {type: "__INIT__"});
    let listeners = [];
    return {
       //подписка на слушателей
       subscribe(fn) {
          listeners.push(fn);
-         //отписка от подписки
          return {
             unsubscribe(){
                listeners = listeners.filter( listener => listener !== fn);
             }
-
          }
       },
 
-      dispatch(){
-
+      dispatch(action){
+         state = rootReducer(state, action);
+         listeners.forEach( listener => listener(state));
       },
 
       getState() {
