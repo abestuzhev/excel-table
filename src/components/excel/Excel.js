@@ -7,11 +7,15 @@ export class Excel {
       this.$el = $(selector);
       this.components = options.components || [];
       this.emitter = new Emitter();
+      this.store = options.store;
    }
 
    getRoot(){
       const $root = $.create('div', 'excel');
-      const componentEmitter = {emitter: this.emitter}
+      const componentEmitter = {
+         emitter: this.emitter,
+         store: this.store
+      };
 
       this.components = this.components.map( Component => {
 
@@ -20,8 +24,6 @@ export class Excel {
          // debugger
          $el.html(component.toHTML());
          $root.append($el);
-
-         console.log('component', component);
          return component;
       });      
       return $root;
