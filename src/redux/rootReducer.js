@@ -1,10 +1,14 @@
-import * as actionName from '@/redux/actions';
+import * as actionName from '@/redux/types';
 
-export function rootReducer(state, action = {}){
-    switch(action){
+export function rootReducer(state, action){
+    let prevState;
+    switch(action.type){
         case actionName.RESIZE_TABLE:
-            break;
-        default: return state;
+            prevState = state.colState || {};
+            prevState[action.data.id] = action.data.value;
+            return {...state, colState: prevState};
+        default:
+            return state;
     }
     
 }

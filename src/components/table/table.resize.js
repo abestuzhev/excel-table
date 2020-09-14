@@ -51,7 +51,7 @@ export function resizeHandler($root, event) {
          }
 
          resolve({
-            width: value,
+            value: value || null,
             id:  type === 'col' ? $parent.data.col : null
          });
       }

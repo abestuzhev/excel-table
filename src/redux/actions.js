@@ -1,1 +1,8 @@
-export const RESIZE_TABLE = 'RESIZE_TABLE';
+import {RESIZE_TABLE} from "@/redux/types";
+
+export function tableResize(data) {
+   return {
+      type: RESIZE_TABLE,
+      data
+   }
+}
