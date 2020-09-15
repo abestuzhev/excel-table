@@ -19,7 +19,7 @@ export class Table extends ExcelComponent {
    }
 
    toHTML() {
-      return createTable();
+      return createTable(40, this.store.getState());
    }
 
    prepare() {
@@ -43,6 +43,7 @@ export class Table extends ExcelComponent {
    async resizeTable(event){
       try{
          const data = await resizeHandler(this.$root, event);
+         console.log('resizeTable', data);
          this.$dispatch(actions.tableResize(data));
       }catch(e){
          console.log(e.message());
